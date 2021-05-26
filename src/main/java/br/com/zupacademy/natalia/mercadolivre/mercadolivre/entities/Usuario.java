@@ -1,5 +1,6 @@
 package br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities;
 
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.validacao.ValorUnico;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -21,19 +22,39 @@ public class Usuario {
     private Long id;
     @NotBlank
     @Email
+    @ValorUnico(domainClass = Usuario.class, fieldName = "login")
     private String login;
     @NotBlank
     private String senha;
     @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy" )
     @PastOrPresent
-    private LocalDateTime horaCadastro = LocalDateTime.now();
+    private LocalDateTime horaCadastro;
+
+    public Usuario(){}
+
 
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = new BCryptPasswordEncoder().encode(senha);
+        this.horaCadastro = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public LocalDateTime getHoraCadastro() {
+        return horaCadastro;
+    }
 }
 
 

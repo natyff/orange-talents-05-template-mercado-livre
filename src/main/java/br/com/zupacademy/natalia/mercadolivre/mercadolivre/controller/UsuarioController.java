@@ -19,6 +19,7 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+
     @PostMapping
     public ResponseEntity<String> novoUsuario (@RequestBody @Valid UsuarioRequest usuarioRequest){
         Usuario usuario = usuarioRequest.converter();

@@ -1,6 +1,8 @@
 package br.com.zupacademy.natalia.mercadolivre.mercadolivre.dao;
 
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Usuario;
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.validacao.ValorUnico;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,12 +13,13 @@ public class UsuarioRequest {
 
     @NotBlank
     @Email
+    @ValorUnico(domainClass = Usuario.class, fieldName = "login")
     private String login;
     @NotBlank
-    @Size(min = 6)
+    @Length(min = 6)
     private String senha;
 
-    public UsuarioRequest(@NotBlank String login, @NotBlank @Size(min = 6) String senha) {
+    public UsuarioRequest(@NotBlank @Email String login, @NotBlank @Size(min = 6) String senha) {
         this.login = login;
         this.senha = senha;
     }
@@ -25,4 +28,11 @@ public class UsuarioRequest {
         return new Usuario(this.login, this.senha);
     };
 
+    public String getLogin() {
+        return login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
 }
