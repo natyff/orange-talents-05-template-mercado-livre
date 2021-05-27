@@ -1,6 +1,6 @@
 package br.com.zupacademy.natalia.mercadolivre.mercadolivre.controller;
 
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dao.UsuarioRequest;
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.UsuarioRequest;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Usuario;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

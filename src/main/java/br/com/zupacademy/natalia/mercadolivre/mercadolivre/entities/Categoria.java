@@ -1,6 +1,6 @@
 package br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities;
 
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dao.CategoriaRequest;
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.CategoriaRequest;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package br.com.zupacademy.natalia.mercadolivre.mercadolivre.dao;
+package br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto;
 
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Usuario;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.validacao.ValorUnico;
@@ -35,4 +35,6 @@ public class UsuarioRequest {
     public String getSenha() {
         return senha;
     }
+
+
 }

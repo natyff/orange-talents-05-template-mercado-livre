@@ -1,9 +1,10 @@
-package br.com.zupacademy.natalia.mercadolivre.mercadolivre.dao;
+package br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto;
 
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Categoria;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.repository.CategoriasRepository;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.validacao.ExistId;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.validacao.ValorUnico;
+
 
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
@@ -46,5 +47,7 @@ public class CategoriaRequest {
             }
         }return categoriaDiferenteDaCategoriaRequestEsseAquiEUmaEntity;
     }
+
+
 }
 
