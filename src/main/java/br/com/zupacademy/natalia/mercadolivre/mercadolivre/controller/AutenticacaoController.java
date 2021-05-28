@@ -2,7 +2,7 @@ package br.com.zupacademy.natalia.mercadolivre.mercadolivre.controller;
 
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.LoginRequest;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.TokenDto;
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.security.TokenService;
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.security.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +24,7 @@ public class AutenticacaoController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    TokenService tokenService;
+    Token token;
 
     @PostMapping
     public ResponseEntity<TokenDto> autenticacao (@RequestBody @Valid LoginRequest login){
@@ -33,7 +33,7 @@ public class AutenticacaoController {
             UsernamePasswordAuthenticationToken dadosLogin = login.converter();
             Authentication authentication = authenticationManager.authenticate(dadosLogin);
 
-            String token = tokenService.gerarToken(authentication);
+            String token = this.token.gerarToken(authentication);
             System.out.println(token);
 
             return ResponseEntity.ok(new TokenDto(token,"Bearer")); //criar a clase DTO para encpsular as infos e levar para o cliente e falar para o cliente como ele vai fazer a autenticação nas proximas requisicos

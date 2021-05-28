@@ -14,11 +14,11 @@ import java.io.IOException;
 
 public class TokenFilter extends OncePerRequestFilter {  // essa classe é chamada uma unica vez a cada nova requisicao
 
-    private TokenService tokenService;  // na classe filter nao consgio fazer injecao de dependencia, entao preciso criar um construtor
+    private Token token;  // na classe filter nao consgio fazer injecao de dependencia, entao preciso criar um construtor
     private UsuarioRepository repository;
 
-    public TokenFilter(TokenService tokenService, UsuarioRepository repository) {
-        this.tokenService = tokenService;
+    public TokenFilter(Token token, UsuarioRepository repository) {
+        this.token = token;
         this.repository = repository;
     }
 
@@ -28,7 +28,7 @@ public class TokenFilter extends OncePerRequestFilter {  // essa classe é chama
             throws ServletException, IOException {
 
         String token = recuperarToken(httpServletRequest);    //recuperar o token do cabeçalho para autenticar dps
-        boolean valido = tokenService.isTokenValido(token);  // retorna se o token é valido ou nao
+        boolean valido = this.token.isTokenValido(token);  // retorna se o token é valido ou nao
         if(valido){
             autenticarCliente(token);
         }
@@ -37,7 +37,7 @@ public class TokenFilter extends OncePerRequestFilter {  // essa classe é chama
 
     private void autenticarCliente(String token) { // aqui eu ja tenho o token e nao quero usuario e senha eu só quero que o Spring autentique o usuario
 
-        Long idUsuario = tokenService.getIdUsuario(token);  // recuperando o ID do usuario (para saber quem é o usuario)
+        Long idUsuario = this.token.getIdUsuario(token);  // recuperando o ID do usuario (para saber quem é o usuario)
         Usuario usuario = repository.findById(idUsuario).get();
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);  // essa classe autentica o usuario, preciso passar quem é o usuario para ela

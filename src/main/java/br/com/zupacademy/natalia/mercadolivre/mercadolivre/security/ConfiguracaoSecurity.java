@@ -20,10 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class ConfiguracaoSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    AutenticacaoService autenticacaoService;
+    Autenticacao autenticacao;
 
     @Autowired
-    TokenService tokenService;
+    Token token;
 
     @Autowired
     UsuarioRepository usuarioRepository;
@@ -40,18 +40,18 @@ public class ConfiguracaoSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/cadastro").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // configurar a autenticacao stateless
-                .and().addFilterBefore(new TokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class); // aqui eu registro(nao via @) o filtro da classe OncePerRequestFilter
+                .and().addFilterBefore(new TokenFilter(token, usuarioRepository), UsernamePasswordAuthenticationFilter.class); // aqui eu registro(nao via @) o filtro da classe OncePerRequestFilter
     }
 
     //configuração de autenticacao - controle de acesso; login
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(autenticacao).passwordEncoder(new BCryptPasswordEncoder());
     }
 }
