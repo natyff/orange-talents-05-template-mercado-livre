@@ -43,6 +43,8 @@ public class Produto {
     private Usuario anunciante;
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<Imagem> imagens = new HashSet<>();
 
 
     public Produto(String nome, BigDecimal valor, Integer quantidade, String descricao,
@@ -58,5 +60,34 @@ public class Produto {
                 .collect(Collectors.toSet()));
 
         Assert.isTrue(this.caracteristicas.size() >=3, "É necessário informar 3 ou mais caracteristicas");
+    }
+
+    public void imagensAdd(Set<String> links){
+        Set<Imagem> novasImagens = links.stream()
+                .map(link -> new Imagem(this, link))
+                .collect(Collectors.toSet());
+        this.imagens.addAll(novasImagens);
+    }
+
+    public boolean pertenceAoUsuario(Usuario anunciante2) {
+        return this.anunciante.equals(anunciante2);
+    }
+
+    public Produto(){};
+
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                ", quantidade=" + quantidade +
+                ", descricao='" + descricao + '\'' +
+                ", categoria=" + categoria +
+                ", anunciante=" + anunciante +
+                ", caracteristicas=" + caracteristicas +
+                ", imagens=" + imagens +
+                '}';
     }
 }
