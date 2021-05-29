@@ -75,6 +75,9 @@ public class Produto {
 
     public Produto(){};
 
+    public Usuario getAnunciante() {
+        return anunciante;
+    }
 
     @Override
     public String toString() {

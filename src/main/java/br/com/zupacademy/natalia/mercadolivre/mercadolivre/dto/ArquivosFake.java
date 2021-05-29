@@ -1,6 +1,6 @@
 package br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto;
 
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.interf.Uploader;
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.uteis.Uploader;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

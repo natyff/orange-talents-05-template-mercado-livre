@@ -2,7 +2,7 @@ package br.com.zupacademy.natalia.mercadolivre.mercadolivre.controller;
 
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.ImagensRequest;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.ProdutoRequest;
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.interf.Uploader;
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.uteis.Uploader;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Produto;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Usuario;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.repository.ProdutoRepository;

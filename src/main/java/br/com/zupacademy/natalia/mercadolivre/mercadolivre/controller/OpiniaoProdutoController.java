@@ -8,6 +8,7 @@ import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Usuario;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.repository.OpiniaoProdutoRepository;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -23,13 +24,10 @@ public class OpiniaoProdutoController {
     @Autowired
     ProdutoRepository produtoRepository;
 
-  @PersistenceContext
-  EntityManager em;
-
 
     @PostMapping("/produto/{id}/opiniao")
-    public String novaOpiniao (@RequestBody @Valid OpiniaoProdutoRequest opiniao, @PathVariable Long id){
-        Usuario comprador = em.find(Usuario.class,12L);
+    public String novaOpiniao (@RequestBody @Valid OpiniaoProdutoRequest opiniao, @PathVariable Long id,
+                               @AuthenticationPrincipal Usuario comprador){
         Produto produto = produtoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Esse produto não existe"));
         OpiniaoProduto opiniaoProduto = opiniao.converter(comprador, produto);
         opiniaoProdutoRepository.save(opiniaoProduto);

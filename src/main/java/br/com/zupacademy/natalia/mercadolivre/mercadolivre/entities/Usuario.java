@@ -43,6 +43,7 @@ public class Usuario implements UserDetails {
         this.horaCadastro = LocalDateTime.now();
     }
 
+
     public Long getId() {
         return id;
     }

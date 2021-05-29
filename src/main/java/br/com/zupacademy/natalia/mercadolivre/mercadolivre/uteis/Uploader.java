@@ -1,4 +1,4 @@
-package br.com.zupacademy.natalia.mercadolivre.mercadolivre.interf;
+package br.com.zupacademy.natalia.mercadolivre.mercadolivre.uteis;
 
 import org.springframework.web.multipart.MultipartFile;
 
