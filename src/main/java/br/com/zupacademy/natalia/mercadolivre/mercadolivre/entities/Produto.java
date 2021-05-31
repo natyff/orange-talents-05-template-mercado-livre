@@ -2,6 +2,7 @@ package br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities;
 
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.CaracteristicaRequest;
 
+
 import io.jsonwebtoken.lang.Assert;
 import org.hibernate.validator.constraints.Length;
 
@@ -11,9 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -45,7 +44,10 @@ public class Produto {
     private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<Imagem> imagens = new HashSet<>();
-
+    @OneToMany(mappedBy = "produto")
+    private List<Pergunta> perguntas = new ArrayList<>();
+    @OneToMany(mappedBy = "produto")
+    private List<OpiniaoProduto> opiniaoProdutos = new ArrayList<>();
 
     public Produto(String nome, BigDecimal valor, Integer quantidade, String descricao,
                    Categoria categoria, Usuario anunciante, Collection<CaracteristicaRequest> caracteristicas) {
@@ -60,6 +62,9 @@ public class Produto {
                 .collect(Collectors.toSet()));
 
         Assert.isTrue(this.caracteristicas.size() >=3, "É necessário informar 3 ou mais caracteristicas");
+    }
+
+    public Produto(Imagem imagem) {
     }
 
     public void imagensAdd(Set<String> links){
@@ -77,6 +82,54 @@ public class Produto {
 
     public Usuario getAnunciante() {
         return anunciante;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public Set<CaracteristicaProduto> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public List<Pergunta> getPerguntas() {
+        return perguntas;
+    }
+
+    public List<OpiniaoProduto> getOpiniaoProdutos() {
+        return opiniaoProdutos;
+    }
+
+    public Set<Imagem> getImagens() {
+        return imagens;
+    }
+
+    public Long somaNotas() {
+        return this.opiniaoProdutos.stream().collect(Collectors.counting());
+    }
+
+    public Map<Integer, Long> totalNotas() {
+        return this.opiniaoProdutos.stream().collect(Collectors.groupingBy(OpiniaoProduto::getNota,
+                Collectors.counting()));
+    }
+    public Double mediaNotas(){
+        return this.opiniaoProdutos.stream().mapToInt(OpiniaoProduto::getNota).average().orElse(0);
     }
 
     @Override

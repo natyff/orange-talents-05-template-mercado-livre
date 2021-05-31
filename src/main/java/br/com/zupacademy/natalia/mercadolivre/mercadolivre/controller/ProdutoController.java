@@ -2,6 +2,7 @@ package br.com.zupacademy.natalia.mercadolivre.mercadolivre.controller;
 
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.ImagensRequest;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto.ProdutoRequest;
+
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.uteis.Uploader;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Produto;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Usuario;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -25,6 +27,7 @@ public class ProdutoController {
 
     @Autowired
     ProdutoRepository produtoRepository;
+
 
     @Autowired
     Uploader arquivosFake;
@@ -46,6 +49,8 @@ public class ProdutoController {
         produtoRepository.save(produto);
         return ResponseEntity.ok().body(produtoRequest.toString());
     }
+
+
 
     @PostMapping("/{id}/imagens")
     public ResponseEntity <String> addImagens(@PathVariable @Valid Long id,  ImagensRequest imagensRequest){

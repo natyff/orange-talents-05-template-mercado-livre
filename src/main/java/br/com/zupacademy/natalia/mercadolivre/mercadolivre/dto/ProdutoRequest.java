@@ -1,8 +1,6 @@
 package br.com.zupacademy.natalia.mercadolivre.mercadolivre.dto;
 
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Categoria;
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Produto;
-import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Usuario;
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.*;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.validacao.ExistId;
 import org.hibernate.validator.constraints.Length;
 
@@ -35,6 +33,7 @@ public class ProdutoRequest {
 
     public ProdutoRequest(String nome, BigDecimal valor, Integer quantidade, String descricao,
                           Long categoriaId, List<CaracteristicaRequest> caracteristicas) {
+
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;
@@ -45,7 +44,8 @@ public class ProdutoRequest {
 
     public Produto converter(EntityManager em, Usuario anunciante){
         Categoria categoria = em.find(Categoria.class, categoriaId);
-        return new Produto(nome, valor, quantidade, descricao, categoria, anunciante, caracteristicas);
+        return new Produto(nome, valor, quantidade, descricao, categoria, anunciante,
+                caracteristicas);
     }
 
     public Set<String> mesmaCaracteristica() {
@@ -83,6 +83,7 @@ public class ProdutoRequest {
     public List<CaracteristicaRequest> getCaracteristicas() {
         return caracteristicas;
     }
+
 
     @Override
     public String toString() {

@@ -20,9 +20,15 @@ public class Imagem {
     @NotBlank
     private String link;
 
+
     public Imagem(Produto produto, String link) {
         this.produto = produto;
         this.link = link;
+    }
+
+
+    public String getLink() {
+        return link;
     }
 
     public Imagem(){};
@@ -47,4 +53,5 @@ public class Imagem {
     public int hashCode() {
         return Objects.hash(produto, link);
     }
+
 }

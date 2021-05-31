@@ -27,12 +27,25 @@ public class OpiniaoProdutoRequest {
         this.nota = nota;
         this.titulo = titulo;
         this.descricao = descricao;
-
     }
 
+    public OpiniaoProdutoRequest() {
+    }
 
     public OpiniaoProduto converter(Usuario comprador, Produto produto){
         return new OpiniaoProduto(this.nota, this.titulo, this.descricao, comprador, produto);
+    }
+
+    public Integer getNota() {
+        return nota;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     @Override

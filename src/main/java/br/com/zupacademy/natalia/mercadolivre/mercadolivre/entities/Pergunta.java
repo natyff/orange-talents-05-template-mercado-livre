@@ -53,4 +53,15 @@ public class Pergunta {
     public Usuario getAnunciante() {
         return produto.getAnunciante();
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public LocalDateTime getCriacao() {
+        return criacao;
+    }
+
+    public Pergunta() {
+    }
 }

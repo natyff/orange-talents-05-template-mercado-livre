@@ -33,11 +33,35 @@ public class OpiniaoProduto {
     @Valid
     private Produto produto;
 
+
     public OpiniaoProduto(Integer nota, String titulo, String descricao, Usuario comprador, Produto produto) {
         this.nota = nota;
         this.titulo = titulo;
         this.descricao = descricao;
         this.comprador = comprador;
         this.produto = produto;
+    }
+
+    public OpiniaoProduto() {
+    }
+
+    public Integer getNota() {
+        return nota;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Usuario getComprador() {
+        return comprador;
+    }
+
+    public Produto getProduto() {
+        return produto;
     }
 }

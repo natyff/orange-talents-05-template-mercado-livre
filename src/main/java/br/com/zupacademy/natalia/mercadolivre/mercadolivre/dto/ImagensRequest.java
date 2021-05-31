@@ -13,6 +13,14 @@ public class ImagensRequest {
     @NotBlank
     private List<MultipartFile> imagens = new ArrayList<>();
 
+
+    public ImagensRequest(List<MultipartFile> imagens) {
+        this.imagens = imagens;
+    }
+
+    public ImagensRequest() {
+    }
+
     public void setImagens(List<MultipartFile> imagens) {
         this.imagens = imagens;
     }
@@ -20,4 +28,6 @@ public class ImagensRequest {
     public List<MultipartFile> getImagens() {
         return imagens;
     }
+
 }
+
