@@ -1,5 +1,6 @@
 package br.com.zupacademy.natalia.mercadolivre.mercadolivre.uteis;
 
+import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.CompraParte1;
 import br.com.zupacademy.natalia.mercadolivre.mercadolivre.entities.Pergunta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,5 +17,10 @@ public class Email {
                 pergunta.getAnunciante().getLogin());
     }
 
+
+    public void enviaCompra(CompraParte1 compra){
+        enviaEmail.enviar("Titulo da compra","Nova Compra", compra.getComprador().getLogin(),
+                compra.getVendedor().getLogin());
+    }
 
 }

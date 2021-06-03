@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class Produto {
     @Positive
     @NotNull
     private BigDecimal valor;
-    @Positive
+    @PositiveOrZero
     private Integer quantidade;
     @NotBlank
     @Length(max = 1000)
@@ -132,6 +133,15 @@ public class Produto {
         return this.opiniaoProdutos.stream().mapToInt(OpiniaoProduto::getNota).average().orElse(0);
     }
 
+    public boolean retiraEstoque(Integer quantidade) {
+        if(quantidade <= this.quantidade){
+            this.quantidade -= quantidade;
+            return true;
+        }
+        return false;
+    }
+
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -146,4 +156,6 @@ public class Produto {
                 ", imagens=" + imagens +
                 '}';
     }
+
+
 }
